@@ -1,98 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <script>
-        let playerScore = 0;
-        let computerScore = 0;
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
+			rel="stylesheet"
+		/>
 
-        function computerPlay(){
-            let options = ["rock", "paper", "scissors"];
-            let randomOptions = Math.floor(Math.random()*options.length)
-            return options[randomOptions]
-        }
+		<link rel="stylesheet" href="css/main.css" />
+		<title>rockPaperScissors</title>
+	</head>
+	<body>
+		<h1 id="welcome">rockPaperScissors</h1>
+		<div id="card">
+			<div id="screen">
+				<h2 id="numberofRound">Round 1</h2>
+				<h3 id="scoreStatus">
+					Its a Tie <br />
+					Both picked scissors
+				</h3>
+				<h4>
+					HUMAN:
+					<br />
+					0
+				</h4>
+				<h4>
+					COMPUTER:
+					<br />
+					5
+				</h4>
+			</div>
 
-        function choiceValidity(playerSelection){
-            playerSelection = playerSelection.toLowerCase();
-
-            if(playerSelection == "rock" || playerSelection == "paper" || playerSelection == "scissors"){
-                console.log("Valid input");
-            }else{
-                console.log(playerSelection + " Invalid input")
-                playerSelection = window.prompt("Please only choose Rock/Paper/Scissors.");
-                choiceValidity(playerSelection)
-                return playerSelection;
-            }
-        }
-
-        function playRound(playerSelection){
-            // Check playerSelection validity
-
-            choiceValidity(playerSelection);
-
-            const computerSelection = computerPlay();
-            playerSelection = playerSelection.toLowerCase();
-
-            // If Player Rock - Computer Paper
-            switch(playerSelection =="rock"){
-                case computerSelection == "rock":
-                    return "It's a Tie! You both choosed Rock";
-                case computerSelection == "paper":
-                    computerScore+=1
-                    return "You Lose! Paper beats Rock";
-                case computerSelection == "scissors":
-                    playerScore+=1
-                    return "You Win! Rock beats Scissors"
-            }
-
-            switch(playerSelection =="paper"){
-                case computerSelection == "paper":
-                    return "It's a Tie! You both choosed Paper";
-                case computerSelection == "scissors":
-                    computerScore+1
-                    return "You Lose! Scissors beats Paper";
-                case computerSelection == "rock":
-                    playerScore+1
-                    return "You Win! Paper beats Rock"
-            }
-
-            switch(playerSelection =="scissors"){
-                case computerSelection == "scissors":
-                    return "It's a Tie! You both choosed Scissors";
-                case computerSelection == "rock":
-                    computerScore+1
-                    return "You Lose! Rock beats Scissors";
-                case computerSelection == "paper":
-                    playerScore+1
-                    return "You Win! Scissors beats Paper"
-            }
-        }
-
-        function fullGame(){
-            playerSelection = window.prompt("Please only choose Rock/Paper/Scissors.");
-
-            while (playerScore < 5 || computerScore <5){
-                playRound(playerSelection)
-                
-                console.log(playerScore)
-                console.log(computerScore)
-
-                if (playerScore == 5){
-                    alert("Congratulations Human Won!")
-                    break
-                }else if (computerScore == 5){
-                    alert("Computer Won! Please try again.")
-                    break
-                }else{
-                    playerSelection = window.prompt("Please choose Rock/Paper/Scissors.");
-                }
-            }
-        }
-
-    </script>
-</body>
+			<div id="actionbutton">
+				<button>ROCK</button>
+				<button>PAPER</button>
+				<button>SCISSORS</button>
+			</div>
+			<button id="startButton">START</button>
+		</div>
+		<script src="js/game.js"></script>
+		<script src="js/definition.js"></script>
+		<script src="js/event.js"></script>
+	</body>
 </html>
