@@ -1,3 +1,5 @@
+console.log("gamejsloaded");
+
 // Inital score for player and computer
 let playerScore = 0;
 let computerScore = 0;
@@ -32,63 +34,96 @@ function playRound(playerSelection) {
 	choiceValidity(playerSelection);
 
 	const computerSelection = computerPlay();
+	console.log(computerSelection);
 	playerSelection = playerSelection.toLowerCase();
 
+	const winStatement = [
+		"You Win! Paper beats Rock",
+		"You Win! Scissors beats Paper",
+		"You Win! Rock beats Scissors",
+	];
+	const loseStatement = [
+		"You Lose! Paper beats Rock",
+		"You Lose! Scissors beats Paper",
+		"You Lose! Rock beats Scissors",
+	];
+	const tieStatement = [
+		"It's a Tie! Both chose Rock",
+		"It's a Tie! Both chose Paper",
+		"It's a Tie! Both chose Scissors",
+	];
+
 	// If Player Rock
-	switch (playerSelection == "rock") {
-		case computerSelection == "rock":
-			return "It's a Tie! You both choosed Rock";
-		case computerSelection == "paper":
-			computerScore += 1;
-			return "You Lose! Paper beats Rock";
-		case computerSelection == "scissors":
-			playerScore += 1;
-			return "You Win! Rock beats Scissors";
-	}
 
-	// If Player Paper
-	switch (playerSelection == "paper") {
-		case computerSelection == "paper":
-			return "It's a Tie! You both choosed Paper";
-		case computerSelection == "scissors":
-			computerScore + 1;
-			return "You Lose! Scissors beats Paper";
-		case computerSelection == "rock":
-			playerScore + 1;
-			return "You Win! Paper beats Rock";
-	}
-
-	// If Player Scissorsd
-	switch (playerSelection == "scissors") {
-		case computerSelection == "scissors":
-			return "It's a Tie! You both choosed Scissors";
-		case computerSelection == "rock":
-			computerScore + 1;
-			return "You Lose! Rock beats Scissors";
-		case computerSelection == "paper":
-			playerScore + 1;
-			return "You Win! Scissors beats Paper";
+	switch (true) {
+		case playerSelection == "rock":
+			switch (true) {
+				case computerSelection == "rock":
+					return tieStatement[0];
+				// return "It's a Tie! You both choosed Rock";
+				case computerSelection == "paper":
+					computerScore += 1;
+					return loseStatement[0];
+				// return "You Lose! Paper beats Rock";
+				case computerSelection == "scissors":
+					playerScore += 1;
+					return winStatement[2];
+				// return "You Win! Rock beats Scissors";
+			}
+		case playerSelection == "paper":
+			// If Player Paper
+			switch (true) {
+				case computerSelection == "paper":
+					return tieStatement[1];
+				// return "It's a Tie! You both choosed Paper";
+				case computerSelection == "scissors":
+					computerScore += 1;
+					return loseStatement[1];
+				// return "You Lose! Scissors beats Paper";
+				case computerSelection == "rock":
+					playerScore += 1;
+					return winStatement[0];
+				// return "You Win! Paper beats Rock";
+			}
+		case playerSelection == "scissors":
+			// If Player Scissorsd
+			switch (true) {
+				case computerSelection == "scissors":
+					return tieStatement[2];
+				// return "It's a Tie! You both choosed Scissors";
+				case computerSelection == "rock":
+					computerScore += 1;
+					return loseStatement[2];
+				// return "You Lose! Rock beats Scissors";
+				case computerSelection == "paper":
+					playerScore += 1;
+					return winStatement[1];
+				// return "You Win! Scissors beats Paper";
+			}
 	}
 }
 
-// Loop 5 times; First Player to get to 5 win.
-function fullGame() {
-	playerSelection = window.prompt("Please only choose Rock/Paper/Scissors.");
+function resetGame() {
+	playerScore = 0;
+	computerScore = 0;
+	click = 0;
+}
 
+// Check Score; first to 5 win
+function checkWinner() {
+	console.log(`Player Score: ${playerScore}`);
+	console.log(`Computer Score: ${computerScore}`);
 	while (playerScore < 5 || computerScore < 5) {
-		playRound(playerSelection);
-
-		console.log(playerScore);
-		console.log(computerScore);
-
 		if (playerScore == 5) {
 			alert("Congratulations Human Won!");
+			resetGame();
 			break;
 		} else if (computerScore == 5) {
 			alert("Computer Won! Please try again.");
+			resetGame();
 			break;
 		} else {
-			playerSelection = window.prompt("Please choose Rock/Paper/Scissors.");
+			break;
 		}
 	}
 }
