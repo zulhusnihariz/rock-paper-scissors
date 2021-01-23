@@ -11,28 +11,8 @@ function computerPlay() {
 	return options[randomOptions];
 }
 
-// Check whether input is valid(rock/paper/scissors); if alert for new input,
-function choiceValidity(playerSelection) {
-	playerSelection = playerSelection.toLowerCase();
-
-	if (
-		playerSelection == "rock" ||
-		playerSelection == "paper" ||
-		playerSelection == "scissors"
-	) {
-		console.log("Valid input");
-	} else {
-		console.log(playerSelection + " Invalid input");
-		playerSelection = window.prompt("Please only choose Rock/Paper/Scissors.");
-		choiceValidity(playerSelection);
-		return playerSelection;
-	}
-}
-
 // Play a round; compare choice and decide winner. Whoever win, +1 to their score
 function playRound(playerSelection) {
-	choiceValidity(playerSelection);
-
 	const computerSelection = computerPlay();
 	console.log(computerSelection);
 	playerSelection = playerSelection.toLowerCase();
@@ -101,12 +81,6 @@ function playRound(playerSelection) {
 				// return "You Win! Scissors beats Paper";
 			}
 	}
-}
-
-function resetGame() {
-	playerScore = 0;
-	computerScore = 0;
-	click = 0;
 }
 
 // Check Score; first to 5 win
